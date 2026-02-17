@@ -14,14 +14,6 @@ Pipe any command output through an LLM for intelligent text processing.
 
 ![Process analysis demo](assets/demo_process.gif)
 
----
-
-```bash
-cat logs.txt | llm_grep "extract all error messages with timestamps"
-kubectl get pods | llm_grep "which pods are failing and why?"
-git diff | llm_grep --model bedrock/anthropic.claude-sonnet-4-20250514-v1:0 "summarize the changes"
-```
-
 ## Installation
 
 Requires [uv](https://docs.astral.sh/uv/getting-started/installation/).
@@ -44,14 +36,6 @@ To uninstall:
 
 ```bash
 uv tool uninstall llm-grep
-```
-
-### Alternative: run directly with uv
-
-If you prefer not to install globally, you can always run it from the project directory:
-
-```bash
-uv run llm_grep "your prompt"
 ```
 
 ## Configuration
@@ -124,18 +108,4 @@ curl -s https://api.example.com/data | llm_grep "extract all email addresses as 
 
 # Use a different model
 ps aux | llm_grep -m bedrock/anthropic.claude-sonnet-4-20250514-v1:0 "which processes are using the most memory?"
-```
-
-## Development
-
-```bash
-# Install dependencies (creates .venv automatically)
-uv sync
-
-# Run tests
-uv run pytest tests/ -v
-
-# Lint and format
-uv run ruff check src/ tests/
-uv run ruff format src/ tests/
 ```
