@@ -2,6 +2,20 @@
 
 Pipe any command output through an LLM for intelligent text processing.
 
+### Extract errors from noisy logs
+
+![Log analysis demo](assets/demo_logs.gif)
+
+### Transform JSON into clean tables
+
+![JSON transform demo](assets/demo_json.gif)
+
+### Analyze processes with natural language
+
+![Process analysis demo](assets/demo_process.gif)
+
+---
+
 ```bash
 cat logs.txt | llm_grep "extract all error messages with timestamps"
 kubectl get pods | llm_grep "which pods are failing and why?"

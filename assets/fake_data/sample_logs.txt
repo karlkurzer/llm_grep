@@ -1,0 +1,20 @@
+2025-02-17 08:12:01 INFO  [auth-service] User login successful: user_id=1042
+2025-02-17 08:12:03 DEBUG [auth-service] Session token generated, ttl=3600s
+2025-02-17 08:12:05 INFO  [api-gateway] GET /api/v1/users/1042 -> 200 (12ms)
+2025-02-17 08:12:07 DEBUG [db-pool] Connection acquired from pool (active=3/10)
+2025-02-17 08:12:08 WARN  [db-pool] Connection pool usage above 80% threshold (8/10)
+2025-02-17 08:12:09 INFO  [api-gateway] POST /api/v1/orders -> 201 (45ms)
+2025-02-17 08:12:10 DEBUG [cache] Cache hit for key: product_catalog_v2
+2025-02-17 08:12:12 ERROR [payment-service] Payment processing failed: timeout after 30s, order_id=ORD-9921
+2025-02-17 08:12:13 INFO  [api-gateway] GET /api/v1/products -> 200 (8ms)
+2025-02-17 08:12:14 DEBUG [auth-service] Token refresh for user_id=1042
+2025-02-17 08:12:15 WARN  [payment-service] Retry attempt 2/3 for order_id=ORD-9921
+2025-02-17 08:12:16 INFO  [notification] Email queued: order_confirmation user_id=1042
+2025-02-17 08:12:18 ERROR [payment-service] Payment gateway unreachable: connection refused to stripe-api.internal:443
+2025-02-17 08:12:19 DEBUG [db-pool] Connection released back to pool (active=2/10)
+2025-02-17 08:12:20 INFO  [api-gateway] GET /health -> 200 (1ms)
+2025-02-17 08:12:22 WARN  [disk-monitor] Disk usage at 91% on /var/data - approaching critical threshold
+2025-02-17 08:12:23 INFO  [scheduler] Cron job backup_daily started
+2025-02-17 08:12:25 ERROR [scheduler] Backup failed: insufficient disk space on /var/data (avail: 2.1GB, needed: 15GB)
+2025-02-17 08:12:26 DEBUG [cache] Cache invalidation for key: user_sessions
+2025-02-17 08:12:28 INFO  [api-gateway] GET /api/v1/users/1042/orders -> 200 (23ms)

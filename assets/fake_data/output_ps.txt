@@ -1,0 +1,10 @@
+Top 3 processes by memory usage:
+
+1. Elasticsearch (PID 2156) - 12.3% MEM (1.0 GB RSS)
+   /usr/share/elasticsearch/jdk/bin/java -Xms1g -Xmx1g
+
+2. Batch Processor (PID 2034) - 8.7% MEM (707 MB RSS)
+   /usr/bin/java -Xmx2g -jar /opt/app/batch-processor.jar
+
+3. Prometheus (PID 1502) - 5.8% MEM (471 MB RSS)
+   /usr/bin/prometheus --config.file=/etc/prometheus/prometheus.yml

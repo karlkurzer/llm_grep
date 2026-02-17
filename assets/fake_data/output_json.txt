@@ -1,0 +1,6 @@
+name,email
+Alice Chen,alice.chen@company.io
+Bob Martinez,bob.m@startup.dev
+Carol Zhang,carol.zhang@enterprise.co
+Dave Okafor,dave.o@agency.net
+Eva Novak,eva.novak@design.studio

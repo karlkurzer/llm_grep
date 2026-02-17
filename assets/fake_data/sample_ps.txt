@@ -1,0 +1,15 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.1 169436 12284 ?        Ss   Feb16   0:03 /sbin/init
+root         412  0.0  0.2 274608 18904 ?        Ss   Feb16   0:01 /usr/lib/systemd/systemd-journald
+root         589  0.1  0.1  25412  9216 ?        Ss   Feb16   0:12 /usr/sbin/sshd -D
+postgres    1024  0.3  4.2 1285436 342108 ?      Ss   Feb16   2:45 /usr/lib/postgresql/15/bin/postgres -D /var/lib/postgresql/15/main
+www-data    1156  1.2  2.8 856320 228556 ?       Sl   Feb16   8:32 /usr/bin/java -Xmx512m -jar /opt/app/api-server.jar
+redis       1203  0.2  1.1 125600  89432 ?       Ssl  Feb16   1:18 /usr/bin/redis-server 0.0.0.0:6379
+node        1347  0.8  3.5 1124480 284672 ?      Sl   Feb16   5:47 node /opt/frontend/server.js
+prometheus  1502  0.5  5.8 2048576 471244 ?      Ssl  Feb16   3:22 /usr/bin/prometheus --config.file=/etc/prometheus/prometheus.yml
+grafana     1618  0.3  1.9 468320 154832 ?       Ssl  Feb16   2:01 /usr/sbin/grafana-server --config=/etc/grafana/grafana.ini
+root        1789  0.0  0.0  10624  3328 ?        S    Feb16   0:00 /usr/sbin/cron -f
+www-data    2034  2.1  8.7 3542016 707148 ?      Sl   08:00  12:34 /usr/bin/java -Xmx2g -jar /opt/app/batch-processor.jar
+elastic     2156  1.8 12.3 5242880 1001472 ?     Sl   Feb16  11:56 /usr/share/elasticsearch/jdk/bin/java -Xms1g -Xmx1g -Des.path.home=/usr/share/elasticsearch
+kurzer      2301  0.0  0.1  12456  5120 pts/0    Ss   08:10   0:00 -bash
+kurzer      2405  0.0  0.0   9876  3456 pts/0    R+   08:12   0:00 ps aux

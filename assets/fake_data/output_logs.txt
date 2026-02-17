@@ -1,0 +1,6 @@
+2025-02-17 08:12:08 ERROR [payment-service] Payment processing failed: timeout after 30s, order_id=ORD-9921
+2025-02-17 08:12:13 WARN  [payment-service] Retry attempt 2/3 for order_id=ORD-9921
+2025-02-17 08:12:18 ERROR [payment-service] Payment gateway unreachable: connection refused to stripe-api.internal:443
+2025-02-17 08:12:08 WARN  [db-pool] Connection pool usage above 80% threshold (8/10)
+2025-02-17 08:12:22 WARN  [disk-monitor] Disk usage at 91% on /var/data - approaching critical threshold
+2025-02-17 08:12:25 ERROR [scheduler] Backup failed: insufficient disk space on /var/data (avail: 2.1GB, needed: 15GB)
