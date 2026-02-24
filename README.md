@@ -22,6 +22,9 @@ Requires [uv](https://docs.astral.sh/uv/getting-started/installation/).
 # Install as a global CLI tool (recommended)
 uv tool install .
 
+# For AWS Bedrock support, include the bedrock extra
+uv tool install ".[bedrock]"
+
 # Now use it anywhere
 cat logs.txt | llm_grep "find errors"
 ```
@@ -30,6 +33,8 @@ To update after making changes to the source:
 
 ```bash
 uv tool install . --force
+# or with Bedrock support:
+uv tool install ".[bedrock]" --force
 ```
 
 To uninstall:
@@ -41,9 +46,8 @@ uv tool uninstall llm-grep
 ## Configuration
 
 The default model is `bedrock/global.amazon.nova-2-lite-v1:0`. It uses
-[litellm](https://docs.litellm.ai/) and `boto3` under the hood, so any standard
-AWS credential chain works out of the box (env vars, `~/.aws/credentials`,
-instance role, etc.).
+[litellm](https://docs.litellm.ai/) under the hood, so any provider litellm
+supports works — including local models via [Ollama](https://ollama.com/).
 
 ### Config file
 
@@ -75,9 +79,38 @@ Models use litellm's `provider/model-name` convention, e.g.:
 - `bedrock/anthropic.claude-sonnet-4-20250514-v1:0`
 - `openai/gpt-4o`
 - `anthropic/claude-sonnet-4-20250514`
+- `ollama/gemma3:1b`
 
-For non-Bedrock providers, set the appropriate API key env var
-(e.g. `OPENAI_API_KEY`) — see the [litellm docs](https://docs.litellm.ai/).
+For cloud providers, set the appropriate API key env var
+(e.g. `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`) — see the
+[litellm docs](https://docs.litellm.ai/). For AWS Bedrock, any standard
+credential chain works (env vars, `~/.aws/credentials`, instance role, etc.).
+
+### Local models (Ollama)
+
+Run any model locally with [Ollama](https://ollama.com/) — no API keys required.
+
+```bash
+# 1. Install Ollama (https://ollama.com/download)
+# 2. Pull a model
+ollama pull gemma3:1b
+
+# 3. Use it with llm_grep (ollama serve starts automatically)
+cat logs.txt | llm_grep -m ollama/gemma3:1b "show only error lines"
+```
+
+To make an Ollama model the default, set it in your config file:
+
+```yaml
+model: ollama/gemma3:1b
+```
+
+If Ollama is running on a non-default host or port, add `api_base`:
+
+```yaml
+model: ollama/gemma3:1b
+api_base: http://my-host:11434
+```
 
 ## Usage
 
@@ -106,6 +139,9 @@ git diff HEAD~3 | llm_grep "summarize what changed and why it matters"
 # Filter and transform JSON
 curl -s https://api.example.com/data | llm_grep "extract all email addresses as a plain list"
 
-# Use a different model
+# Use a different cloud model
 ps aux | llm_grep -m bedrock/anthropic.claude-sonnet-4-20250514-v1:0 "which processes are using the most memory?"
+
+# Use a local Ollama model
+ps aux | llm_grep -m ollama/gemma3:1b "which processes are using the most CPU?"
 ```

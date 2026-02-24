@@ -759,9 +759,13 @@ name = "llm-grep"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "boto3" },
     { name = "litellm" },
     { name = "pyyaml" },
+]
+
+[package.optional-dependencies]
+bedrock = [
+    { name = "boto3" },
 ]
 
 [package.dev-dependencies]
@@ -772,10 +776,11 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "boto3", specifier = ">=1.42.50" },
+    { name = "boto3", marker = "extra == 'bedrock'", specifier = ">=1.42.50" },
     { name = "litellm", specifier = ">=1.81.13" },
     { name = "pyyaml", specifier = ">=6.0.3" },
 ]
+provides-extras = ["bedrock"]
 
 [package.metadata.requires-dev]
 dev = [

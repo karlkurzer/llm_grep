@@ -50,6 +50,11 @@ def stream_completion(
             yield delta.content
 
 
+def _is_ollama_model(model: str) -> bool:
+    """Return True if the model string targets a local Ollama instance."""
+    return model.startswith(("ollama/", "ollama_chat/"))
+
+
 def run(config: Config, prompt: str, stdin_text: str) -> int:
     """Send the prompt + stdin to the LLM and stream the response to stdout.
 
@@ -63,18 +68,37 @@ def run(config: Config, prompt: str, stdin_text: str) -> int:
         sys.stdout.write("\n")
         return 0
     except litellm.AuthenticationError:
-        print(
-            "Error: Authentication failed. "
-            "Set the appropriate API key environment variable "
-            "(e.g. OPENAI_API_KEY, ANTHROPIC_API_KEY).",
-            file=sys.stderr,
-        )
+        if _is_ollama_model(config.model):
+            print(
+                "Error: Could not authenticate with Ollama. "
+                "Ensure 'ollama serve' is running.",
+                file=sys.stderr,
+            )
+        else:
+            print(
+                "Error: Authentication failed. "
+                "Set the appropriate API key environment variable "
+                "(e.g. OPENAI_API_KEY, ANTHROPIC_API_KEY).",
+                file=sys.stderr,
+            )
         return 1
     except litellm.BadRequestError as exc:
         print(f"Error: Bad request — {exc}", file=sys.stderr)
         return 1
     except litellm.APIConnectionError as exc:
-        print(f"Error: Could not connect to the LLM API — {exc}", file=sys.stderr)
+        if _is_ollama_model(config.model):
+            print(
+                "Error: Could not connect to Ollama. "
+                "Ensure 'ollama serve' is running on the expected host "
+                "(default: http://localhost:11434). "
+                "Set 'api_base' in your config file for a custom URL.",
+                file=sys.stderr,
+            )
+        else:
+            print(
+                f"Error: Could not connect to the LLM API — {exc}",
+                file=sys.stderr,
+            )
         return 1
     except Exception as exc:  # noqa: BLE001
         print(f"Error: {exc}", file=sys.stderr)

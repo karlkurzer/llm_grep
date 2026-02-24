@@ -8,10 +8,12 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "boto3>=1.42.50",
     "litellm>=1.81.13",
     "pyyaml>=6.0.3",
 ]
+
+[project.optional-dependencies]
+bedrock = ["boto3>=1.42.50"]
 
 [project.scripts]
 llm_grep = "llm_grep.cli:main"

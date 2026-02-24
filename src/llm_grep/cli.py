@@ -23,7 +23,8 @@ def _build_parser() -> argparse.ArgumentParser:
             "Examples:\n"
             '  cat logs.txt | llm_grep "extract all error messages"\n'
             '  kubectl get pods | llm_grep "which pods are failing?"\n'
-            '  git diff | llm_grep --model anthropic/claude-sonnet-4-20250514 "summarize changes"\n'
+            '  git diff | llm_grep -m anthropic/claude-sonnet-4-20250514 "summarize changes"\n'
+            '  ps aux | llm_grep -m ollama/gemma3:1b "which processes use the most CPU?"\n'
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -36,7 +37,7 @@ def _build_parser() -> argparse.ArgumentParser:
         "-m",
         "--model",
         default=None,
-        help="LLM model to use (litellm format, e.g. openai/gpt-4o, anthropic/claude-sonnet-4-20250514). "
+        help="LLM model to use (litellm format, e.g. openai/gpt-4o, ollama/gemma3:1b). "
         "Overrides config file and LLM_GREP_MODEL env var.",
     )
     parser.add_argument(
